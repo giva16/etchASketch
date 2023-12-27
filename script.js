@@ -1,17 +1,20 @@
-// Min Objectives:
-// 1) Render Grids
-// 2) Draw on the rendered grids
+// Global state
+let mouseIsDown = false;
 
-// Sub Problems from 1)
-// draw a 16 x 16 grid
-
-
-// select container for grid rows
+// UI
 const root = document.querySelector('html');
 const container = document.querySelector('.grid-container');
 const clearBtn = document.querySelector('#btnClear');
 const createBtn = document.querySelector('#btnCreate');
 
+// Event Listeners
+root.addEventListener('mousedown', () => {mouseIsDown = true;})
+root.addEventListener('mouseup', () => {mouseIsDown = false;})
+container.addEventListener('mouseover', fillSquare);
+clearBtn.onclick = clearGrid;
+createBtn.onclick = renderCustomGrid;
+
+// Grid Rendering
 function createSquare(row) {
     let square = document.createElement('div');
     square.classList.add('square');
@@ -26,19 +29,6 @@ function clearGrid(){
     }
 }
 
-function resetCanvas() {
-    container.innerHTML = '';
-}
-
-
-// row to contain squares in a flex container that will ensure even space distribution
-function createRow() {
-    let row = document.createElement('div');
-    row.classList.add('row');
-    return row;
-}
-
-// draw 16 row of 16 squares
 // create n row divs and n squares inside the divs to render the grid
 function renderGrid(dim) {
     resetCanvas();
@@ -51,19 +41,27 @@ function renderGrid(dim) {
     }
 }
 
-// draw function keeps track of mouseUp and mouseDown events from the root of the document
-// so that the squres are only filled when the mouse left button is held
-function draw() {
-    let mouseIsDown = false;
-    root.addEventListener('mousedown', function(){mouseIsDown = true});
-    root.addEventListener('mouseup', function() {mouseIsDown = false});
-    container.addEventListener('mouseover', function(e){
-        if (e.target.classList.contains('square') && mouseIsDown === true) {
-            e.target.classList.add('fill');
-        }
-    });
+// USER CONTROLS
+function resetCanvas() {
+    container.innerHTML = '';
 }
 
+// row to contain squares in a flex container that will ensure even space distribution
+function createRow() {
+    let row = document.createElement('div');
+    row.classList.add('row');
+    return row;
+}
+
+
+// adds 'fill' class to fill a square with black background
+function fillSquare(event) {
+    if (event.target.classList.contains('square') && mouseIsDown === true) {
+        event.target.classList.add('fill');
+    }
+}
+
+// accept user input in order to render a custom dimension grid
 function renderCustomGrid() {
     let dim = prompt("Enter a grid size: ");
     
@@ -73,9 +71,4 @@ function renderCustomGrid() {
     renderGrid(parseInt(dim));
 }
 
-
-clearBtn.addEventListener('click', clearGrid);
-createBtn.addEventListener('click', renderCustomGrid);
-
 renderGrid(20);
-draw();
