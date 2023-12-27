@@ -9,12 +9,27 @@
 // select container for grid rows
 const root = document.querySelector('html');
 const container = document.querySelector('.grid-container');
+const clearBtn = document.querySelector('#btnClear');
+const createBtn = document.querySelector('#btnCreate');
 
 function createSquare(row) {
     let square = document.createElement('div');
     square.classList.add('square');
     row.appendChild(square);
 }
+
+function clearGrid(){
+    for (row of container.children){
+        for (square of row.children){
+           square.classList.remove('fill');
+        }
+    }
+}
+
+function resetCanvas() {
+    container.innerHTML = '';
+}
+
 
 // row to contain squares in a flex container that will ensure even space distribution
 function createRow() {
@@ -26,6 +41,7 @@ function createRow() {
 // draw 16 row of 16 squares
 // create n row divs and n squares inside the divs to render the grid
 function renderGrid(dim) {
+    resetCanvas();
     for (let i = 0; i < dim; i++){
         let row = createRow();
         for (let j = 0; j < dim; j++){
@@ -48,5 +64,18 @@ function draw() {
     });
 }
 
-renderGrid(64);
+function renderCustomGrid() {
+    let dim = prompt("Enter a grid size: ");
+    
+    while (!Number.isInteger(parseInt(dim)) || (dim % 1) != 0){
+        dim = prompt("Invalid Input! Enter a grid size again (whole number): ");
+    }
+    renderGrid(parseInt(dim));
+}
+
+
+clearBtn.addEventListener('click', clearGrid);
+createBtn.addEventListener('click', renderCustomGrid);
+
+renderGrid(20);
 draw();
