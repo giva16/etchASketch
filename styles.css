@@ -4,17 +4,57 @@
     box-sizing: border-box;
 }
 
-.grid-container {
-    height: 30vw;
-    width: 30vw;
-    margin: 0 auto;
-    margin-top: 100px;
+body {
+    height: 100vh;
+    background-color: rgb(46, 41, 78);
+}
+
+main {
+    width: 70%;
+    margin:  0 auto;
+    padding: 0 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 32px;
+    color: #E71D36;
+    font-weight: 400;
+    font-family: 'Press Start 2P', 'Times New Roman', Calibri;
+    margin: 80px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.controls {
     display: flex;
     flex-direction: column;
-    border: 1px solid gray;
+    justify-content: space-evenly;
+    padding: 20px;
+    max-height: 200px;
+    background-color: rgb(55, 49, 88);
+}
+
+.btn {
+    width: 300px;
+    padding: 5px 20px;
+    border-radius: 5px;
+    background-color: rgb(244, 96, 54);
+}
+
+.grid-container {
+    height: 600px;
+    width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(55, 49, 88);
+    padding: 30px;
 }
 
 .square {
+    background-color: white;
     border: solid 1px gray;
     flex: 1;
 }
