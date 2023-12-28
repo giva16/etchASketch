@@ -54,7 +54,6 @@ function createRow() {
     return row;
 }
 
-
 // adds 'fill' class to fill a square with black background
 function fillSquare(event) {
     if (event.target.classList.contains('square') && mouseIsDown === true) {
@@ -63,6 +62,17 @@ function fillSquare(event) {
         } else {
             event.target.style.backgroundColor = 'black';
         }
+    }
+}
+
+function toggleRainbow() {
+    if (rainbowMode) {
+        rainbowMode = false;
+        rainbowBtn.style.backgroundColor = '';
+    }
+    else {
+        rainbowMode = true;
+        rainbowBtn.style.backgroundColor = 'yellow';
     }
 }
 
@@ -87,12 +97,6 @@ function randomHexColor() {
     let hb = b.toString(16).padStart(2, '0');
     return "#" + hr + hg + hb;
 }
-
-function toggleRainbow() {
-    if (rainbowMode) {rainbowMode = false;}
-    else {rainbowMode = true;}
-}
-
 
 
 renderGrid(20);
