@@ -8,14 +8,18 @@ const container = document.querySelector('.grid-container');
 const clearBtn = document.querySelector('#btnClear');
 const createBtn = document.querySelector('#btnCreate');
 const rainbowBtn = document.querySelector('#btnRainbow');
+const colorModeBtn = document.querySelector('#btnColor');
+const colorSelector = document.querySelector("#color");
 
 // Event Listeners
-root.addEventListener('mousedown', () => {mouseIsDown = true;})
-root.addEventListener('mouseup', () => {mouseIsDown = false;})
+root.addEventListener('mousedown', () => {mouseIsDown = true;});
+root.addEventListener('mouseup', () => {mouseIsDown = false;});
 container.addEventListener('mouseover', fillSquare);
 clearBtn.onclick = clearGrid;
 createBtn.onclick = renderCustomGrid;
+colorModeBtn.onclick = toggleColor;
 rainbowBtn.onclick = toggleRainbow;
+
 
 // Grid Rendering
 function createSquare(row) {
@@ -60,20 +64,21 @@ function fillSquare(event) {
         if (rainbowMode){
             event.target.style.backgroundColor = randomHexColor();
         } else {
-            event.target.style.backgroundColor = 'black';
+            event.target.style.backgroundColor = colorSelector.value;
         }
     }
 }
 
 function toggleRainbow() {
-    if (rainbowMode) {
-        rainbowMode = false;
-        rainbowBtn.style.backgroundColor = '';
-    }
-    else {
         rainbowMode = true;
-        rainbowBtn.style.backgroundColor = 'yellow';
-    }
+        rainbowBtn.classList.add('selected');
+        colorModeBtn.classList.remove('selected');
+}
+
+function toggleColor() {
+    rainbowMode = false;
+    colorModeBtn.classList.add('selected');
+    rainbowBtn.classList.remove('selected');
 }
 
 // accept user input in order to render a custom dimension grid
