@@ -84,7 +84,7 @@ input[type="range"] {
     flex-direction: column;
     justify-content: space-evenly;
     padding: 20px;
-    max-height: 600px;
+    min-height: 500px;
     background-color: rgb(55, 49, 88);
     border-radius: 10px;
 }
