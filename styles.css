@@ -26,12 +26,13 @@ input {
 }
 
 label {
-    font-size: 2rem;
-    text-align: center;
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: left;
 }
 
 
-.colorPicker {
+.sizeSlider, .colorPicker {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -64,6 +65,10 @@ input[type="color"]:hover {
     transform: scale(1.1);
 }
 
+input[type="range"] {
+    width: 300px;
+}
+
 .title {
     font-size: 32px;
     color: #E71D36;
@@ -79,7 +84,7 @@ input[type="color"]:hover {
     flex-direction: column;
     justify-content: space-evenly;
     padding: 20px;
-    max-height: 400px;
+    max-height: 600px;
     background-color: rgb(55, 49, 88);
     border-radius: 10px;
 }

@@ -10,15 +10,18 @@ const createBtn = document.querySelector('#btnCreate');
 const rainbowBtn = document.querySelector('#btnRainbow');
 const colorModeBtn = document.querySelector('#btnColor');
 const colorSelector = document.querySelector("#color");
+const sizeSlider = document.querySelector("#size")
+const sizeIndicator = document.querySelector("#currSize");
 
 // Event Listeners
 root.addEventListener('mousedown', () => {mouseIsDown = true;});
 root.addEventListener('mouseup', () => {mouseIsDown = false;});
 container.addEventListener('mouseover', fillSquare);
 clearBtn.onclick = clearGrid;
-createBtn.onclick = renderCustomGrid;
 colorModeBtn.onclick = toggleColor;
 rainbowBtn.onclick = toggleRainbow;
+sizeSlider.onmousemove = (e) => updateSize(e.target.value);
+sizeSlider.onchange = changeSize;
 
 
 // Grid Rendering
@@ -37,11 +40,11 @@ function clearGrid(){
 }
 
 // create n row divs and n squares inside the divs to render the grid
-function renderGrid(dim) {
+function renderGrid() {
     resetCanvas();
-    for (let i = 0; i < dim; i++){
+    for (let i = 0; i < sizeSlider.value; i++){
         let row = createRow();
-        for (let j = 0; j < dim; j++){
+        for (let j = 0; j < sizeSlider.value; j++){
             createSquare(row);
         }
         container.appendChild(row);
@@ -81,13 +84,15 @@ function toggleColor() {
     rainbowBtn.classList.remove('selected');
 }
 
-// accept user input in order to render a custom dimension grid
-function renderCustomGrid() {
-    let dim = prompt("Enter a grid size: ");
-    while (!Number.isInteger(parseInt(dim)) || (dim % 1) != 0){
-        dim = prompt("Invalid Input! Enter a grid size again (whole number): ");
-    }
-    renderGrid(parseInt(dim));
+// Change size value on text
+function updateSize(value) {
+    sizeIndicator.innerHTML = `${value} x ${value}`;
+}
+
+// accept user input via slider to render a custom dimension grid
+function changeSize() {
+    clearGrid();
+    renderGrid();
 }
 
 function randomVal(max) {return Math.floor(Math.random() * max) + 1;}
@@ -104,4 +109,4 @@ function randomHexColor() {
 }
 
 
-renderGrid(20);
+renderGrid();
